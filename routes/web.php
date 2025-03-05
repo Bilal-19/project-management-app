@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,14 +19,20 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::redirect("/", "/dashboard");
+
+Route::middleware(['auth', 'verified'])->group(
+    function () {
+        Route::get("/dashboard", fn() => Inertia::render('Dashboard'))->name('Dashboard');
+
+        // Route::resource generates routes for 'CRUD' operations.
+        Route::resource('project', ProjectController::class);
+        Route::resource('task', TaskController::class);
+        Route::resource('user', UserController::class);
+    }
+);
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -35,4 +44,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
