@@ -10,7 +10,7 @@ class Projects extends Model
     use HasFactory;
     public function tasks()
     {
-        return $this->hasMany(Tasks::class);
+        return $this->hasMany(Task::class);
     }
 }
 

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('assigned_user_id')->constrained('users');
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
-            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('projects_id')->constrained('projects');
 
             $table->timestamps();
         });
