@@ -4,7 +4,7 @@ import { Head, Link, router } from "@inertiajs/react";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "../Constant";
 import TextInput from "@/Components/TextInput";
 import SelectInput from "@/Components/SelectInput";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/16/solid"
+import TableHeading from "@/Components/TableHeading";
 
 export default function Index({ auth, projects, queryParams = null }) {
     queryParams = queryParams || {}
@@ -54,77 +54,71 @@ export default function Index({ auth, projects, queryParams = null }) {
                             <table className="w-full text-white">
                                 <thead className="bg-gray-500 uppercase">
                                     <tr className="text-nowrap">
-                                        <th onClick={e => sortChanged('id')}>
-                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
-                                                ID
-                                                <div>
-                                                    <ChevronUpIcon className={
-                                                        "w-4 " +
-                                                        (
-                                                            queryParams.sort_field === 'id'
-                                                                &&
-                                                            queryParams.sort_direction === "asc" ? "text-gray-800" : ""
-                                                        )
-                                                    } />
-                                                    <ChevronDownIcon className={
-                                                        "w-4 -mt-2 " +
-                                                        (
-                                                            queryParams.sort_field === 'id'
-                                                                &&
-                                                            queryParams.sort_direction === "desc" ? "text-gray-800" : ""
-                                                        )
-                                                    } />
-                                                </div>
-                                            </div>
-                                        </th>
 
-                                        <th className="px-3 py-3">Image</th>
+                                        <TableHeading
+                                            colName="id"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            ID
+                                        </TableHeading>
 
-                                        <th onClick={e => sortChanged('name')}>
-                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
-                                                Name
-                                                <div>
-                                                    <ChevronUpIcon className="w-4" />
-                                                    <ChevronDownIcon className="w-4 -mt-2" />
-                                                </div>
-                                            </div>
-                                        </th>
+                                        <TableHeading
+                                            colName="image_path"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}
+                                            sortable={false}>
+                                            Image
+                                        </TableHeading>
 
-                                        <th onClick={e => sortChanged('status')}>
-                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
-                                                Status
-                                                <div>
-                                                    <ChevronUpIcon className="w-4" />
-                                                    <ChevronDownIcon className="w-4 -mt-2" />
-                                                </div>
-                                            </div>
-                                        </th>
+                                        <TableHeading
+                                            colName="name"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            Name
+                                        </TableHeading>
 
-                                        <th onClick={e => sortChanged('created_at')}>
-                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
-                                                Created Date
-                                                <div>
-                                                    <ChevronUpIcon className="w-4" />
-                                                    <ChevronDownIcon className="w-4 -mt-2" />
-                                                </div>
-                                            </div>
-                                        </th>
+                                        <TableHeading
+                                            colName="status"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            Status
+                                        </TableHeading>
 
-                                        <th onClick={e => sortChanged('due_date')}>
-                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
-                                                Due Date
-                                                <div>
-                                                    <ChevronUpIcon className="w-4" />
-                                                    <ChevronDownIcon className="w-4 -mt-2" />
-                                                </div>
-                                            </div>
-                                        </th>
 
-                                        <th className="px-3 py-3 flex items-center justify-between gap-1 cursor-pointer">Created By <div>
-                                            <ChevronUpIcon className="w-4" />
-                                            <ChevronDownIcon className="w-4 -mt-2" />
-                                        </div></th>
-                                        <th className="px-3 py-3">Actions</th>
+
+                                        <TableHeading
+                                            colName="created_at"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            Created Date
+                                        </TableHeading>
+
+                                        <TableHeading
+                                            colName="due_date"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            Due Date
+                                        </TableHeading>
+
+                                        <TableHeading
+                                            colName="created_by"
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                            Created By
+                                        </TableHeading>
+
+                                        <TableHeading
+                                            colName="actions"
+                                            sortable={false}>
+                                            Actions
+                                        </TableHeading>
                                     </tr>
                                 </thead>
                                 <thead className="bg-gray-700 uppercase border-b-2">
