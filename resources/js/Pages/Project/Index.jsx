@@ -4,6 +4,7 @@ import { Head, Link, router } from "@inertiajs/react";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "../Constant";
 import TextInput from "@/Components/TextInput";
 import SelectInput from "@/Components/SelectInput";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/16/solid"
 
 export default function Index({ auth, projects, queryParams = null }) {
     queryParams = queryParams || {}
@@ -51,23 +52,86 @@ export default function Index({ auth, projects, queryParams = null }) {
 
                         <div class="overflow-auto">
                             <table className="w-full text-white">
-                                <thead className="bg-gray-700 uppercase">
+                                <thead className="bg-gray-500 uppercase">
                                     <tr className="text-nowrap">
-                                        <th onClick={e => sortChanged('id')} className="px-3 py-3 border-r">ID</th>
-                                        <th className="px-3 py-3 border-r">Image</th>
-                                        <th onClick={e => sortChanged('name')} className="px-3 py-3 border-r">Name</th>
-                                        <th onClick={e => sortChanged('status')} className="px-3 py-3 border-r">Status</th>
-                                        <th onClick={e => sortChanged('created_at')} className="px-3 py-3 border-r">Created Date</th>
-                                        <th onClick={e => sortChanged('due_date')} className="px-3 py-3 border-r">Due Date</th>
-                                        <th className="px-3 py-3 border-r">Created By</th>
-                                        <th className="px-3 py-3 border-r">Actions</th>
+                                        <th onClick={e => sortChanged('id')}>
+                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
+                                                ID
+                                                <div>
+                                                    <ChevronUpIcon className={
+                                                        "w-4 " +
+                                                        (
+                                                            queryParams.sort_field === 'id'
+                                                                &&
+                                                            queryParams.sort_direction === "asc" ? "text-gray-800" : ""
+                                                        )
+                                                    } />
+                                                    <ChevronDownIcon className={
+                                                        "w-4 -mt-2 " +
+                                                        (
+                                                            queryParams.sort_field === 'id'
+                                                                &&
+                                                            queryParams.sort_direction === "desc" ? "text-gray-800" : ""
+                                                        )
+                                                    } />
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th className="px-3 py-3">Image</th>
+
+                                        <th onClick={e => sortChanged('name')}>
+                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
+                                                Name
+                                                <div>
+                                                    <ChevronUpIcon className="w-4" />
+                                                    <ChevronDownIcon className="w-4 -mt-2" />
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th onClick={e => sortChanged('status')}>
+                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
+                                                Status
+                                                <div>
+                                                    <ChevronUpIcon className="w-4" />
+                                                    <ChevronDownIcon className="w-4 -mt-2" />
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th onClick={e => sortChanged('created_at')}>
+                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
+                                                Created Date
+                                                <div>
+                                                    <ChevronUpIcon className="w-4" />
+                                                    <ChevronDownIcon className="w-4 -mt-2" />
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th onClick={e => sortChanged('due_date')}>
+                                            <div className="px-3 py-3 flex flex-row items-center justify-between gap-1 cursor-pointer">
+                                                Due Date
+                                                <div>
+                                                    <ChevronUpIcon className="w-4" />
+                                                    <ChevronDownIcon className="w-4 -mt-2" />
+                                                </div>
+                                            </div>
+                                        </th>
+
+                                        <th className="px-3 py-3 flex items-center justify-between gap-1 cursor-pointer">Created By <div>
+                                            <ChevronUpIcon className="w-4" />
+                                            <ChevronDownIcon className="w-4 -mt-2" />
+                                        </div></th>
+                                        <th className="px-3 py-3">Actions</th>
                                     </tr>
                                 </thead>
                                 <thead className="bg-gray-700 uppercase border-b-2">
                                     <tr className="text-nowrap">
-                                        <th className="px-3 py-3 border-r"></th>
-                                        <th className="px-3 py-3 border-r"></th>
-                                        <th className="px-3 py-3 border-r">
+                                        <th className="px-3 py-3"></th>
+                                        <th className="px-3 py-3"></th>
+                                        <th className="px-3 py-3">
                                             <TextInput
                                                 className="w-full"
                                                 placeholder="Project Name"
@@ -76,7 +140,7 @@ export default function Index({ auth, projects, queryParams = null }) {
                                                 defaultValue={queryParams.name}
                                             />
                                         </th>
-                                        <th className="px-3 py-3 border-r">
+                                        <th className="px-3 py-3">
                                             <SelectInput
                                                 className="w-full"
                                                 defaultValue={queryParams.status}
@@ -88,10 +152,10 @@ export default function Index({ auth, projects, queryParams = null }) {
                                                 <option value="completed">Completed</option>
                                             </SelectInput>
                                         </th>
-                                        <th className="px-3 py-3 border-r"></th>
-                                        <th className="px-3 py-3 border-r"></th>
-                                        <th className="px-3 py-3 border-r"></th>
-                                        <th className="px-3 py-3 border-r"></th>
+                                        <th className="px-3 py-3"></th>
+                                        <th className="px-3 py-3"></th>
+                                        <th className="px-3 py-3"></th>
+                                        <th className="px-3 py-3"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,7 +164,7 @@ export default function Index({ auth, projects, queryParams = null }) {
                                             <tr className="bg-gray-900 border-b" key={value.id}>
                                                 <td className="text-center px-3 py-3">{value.id}</td>
                                                 <td>
-                                                    <img src={value.image_path} className="w-60" />
+                                                    <img src={value.image_path} className="w-60" alt="image-not-found" />
                                                 </td>
                                                 <td>{value.name}</td>
                                                 <td className="px-3 py-3">
